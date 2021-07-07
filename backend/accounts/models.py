@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.shortcuts import resolve_url
 from django.db import models
@@ -6,6 +7,12 @@ from django.db import models
 class User(AbstractUser):
     website_url = models.URLField(blank=True)
     bio = models.TextField(blank=True)
+    follower_set = models.ManyToManyField(
+        "self", related_name="my_following_set", blank=True, symmetrical=False
+    )
+    following_set = models.ManyToManyField(
+        "self", related_name="my_follower_set", blank=True, symmetrical=False
+    )
     avatar = models.ImageField(upload_to="accounts/avatar/%Y/%m/%d", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
