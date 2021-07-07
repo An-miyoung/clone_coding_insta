@@ -25,6 +25,7 @@ class Post(TimestampedModel):
     def __str__(self):
         return self.caption
 
+
     def extract_tag_set(self):
         tag_name_list = re.findall(r"#([a-zA-Z\dㄱ-힣]+)", self.caption)
         tag_list = []
