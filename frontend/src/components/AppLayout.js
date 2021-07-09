@@ -23,7 +23,7 @@ export default function AppLayout({children}) {
                 {children}
             </div>
             <div className="footer">
-                footer
+                &copy; 2021. PlusBogi
             </div>
         </div>
     )
