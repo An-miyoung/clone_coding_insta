@@ -6,11 +6,11 @@ import 'antd/dist/antd.css';
 import Root from 'pages';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <React.StrictMode>
-        <Root />
-    </React.StrictMode>
-  </BrowserRouter>,
+  <React.StrictMode>
+      <BrowserRouter>
+          <Root />
+    </BrowserRouter>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

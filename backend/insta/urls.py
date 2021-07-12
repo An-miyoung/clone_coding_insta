@@ -8,5 +8,6 @@ router.register('posts', views.PostViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
+    path('accounts/', include("accounts.urls")),
 ]
 
