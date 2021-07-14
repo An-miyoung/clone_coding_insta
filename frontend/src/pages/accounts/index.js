@@ -4,14 +4,15 @@ import Signup from "./Signup";
 import Login from "./Login";
 import Profile from "./Profile";
 import Friend from "./Friend";
+import LoginRequiredRoute from "utils/LoginRequiredRoute";
 
 export default function Routes({match}) {
     return (
         <>
-            <Route exact path={match.url+"/profile"} component={Profile} />
+            <LoginRequiredRoute exact path={match.url+"/profile"} component={Profile} />
             <Route exact path={match.url+"/signup"} component={Signup} />
             <Route exact path={match.url+"/login"} component={Login} />
-            <Route exact path={match.url+"/friend"} component={Friend} />
+            <LoginRequiredRoute exact path={match.url+"/friend"} component={Friend} />
         </>
     )
 }

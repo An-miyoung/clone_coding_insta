@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import Axios from "axios";
 import { Card, Form, Input, Button, notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import useLocalStorage from "utils/useLocalStorage";
 import { useAppContext, setToken } from "store";
 
 
 export default function Login() {
     const { dispatch } = useAppContext();
+    const location = useLocation();
     const history = useHistory();
     const [fieldErrors, setFieldErrors] = useState({});
+
+    const { from: loginRedirectUrl } = location.state || {from: {pathname: "/"}};
 
     const onFinish = (values) => {
         async function fn() {
@@ -29,7 +32,7 @@ export default function Login() {
                     icon: <SmileOutlined style={{color: "#108ee9"}} />
                 });
 
-                // history.push("/");
+                history.push(loginRedirectUrl);
             }
             catch(error) {
                 if (error.response) {
