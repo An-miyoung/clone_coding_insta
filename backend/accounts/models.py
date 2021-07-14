@@ -29,4 +29,4 @@ class User(AbstractUser):
         if self.avatar:
             return self.avatar.url
         else :
-            resolve_url("pydenticon_image", self.user.name)
+            return resolve_url("pydenticon_image", self.username)

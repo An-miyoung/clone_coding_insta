@@ -3,7 +3,10 @@ import SuggestionList from "components/SuggestionList";
 
 export default function Friend() {
     return (
-       <SuggestionList />
+        <div style={{marginLeft:'0.5rem'}}>
+            <SuggestionList />
+        </div>
+       
     )
     
 }

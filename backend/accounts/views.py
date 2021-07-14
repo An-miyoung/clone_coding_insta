@@ -1,12 +1,17 @@
 from insta import serializers
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.permissions import AllowAny
-from .serializers import SignupSerializer
+from .serializers import SignupSerializer, SuggestionUserSerializer
 
 
 class SignupView(CreateAPIView):
     model = get_user_model()
     serializer_class = SignupSerializer
     permission_classes = [AllowAny]
+
+
+class SuggestionListView(ListAPIView):
+    queryset = get_user_model().objects.all()
+    serializer_class = SuggestionUserSerializer

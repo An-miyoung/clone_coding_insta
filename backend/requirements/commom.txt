@@ -2,4 +2,5 @@ django~=3.0.0
 djangorestframework
 django-cors-headers
 djangorestframework-jwt
+django-pydenticon
 pillow

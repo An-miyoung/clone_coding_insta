@@ -21,7 +21,7 @@ export default function AppLayout({children}) {
                             <Link to={{ pathname: "/accounts/login"}}>로그인</Link>
                         </Menu.Item>
                         <Menu.Item>
-                            <Link to={{ pathname: "/accounts/friend"}}>친구찾기</Link>
+                            <Link to={{ pathname: "/accounts/friend"}}>추천친구</Link>
                         </Menu.Item>
                     </Menu>
                 </div>
