@@ -10,7 +10,9 @@ export default function AppLayout({children}) {
         <div className="app">
             <div className="header">
                 <div className="page-logo">
-                    <img src={LogoImage} alt="logo" style={{marginRight:'0.5em'}} />
+                    <Link to={{ pathname: "/"}}>
+                        <img src={LogoImage} alt="logo" style={{marginRight:'0.5em'}} />
+                    </Link>
                 </div>
                 <div className="topnav">
                     <Menu mode="horizontal">
@@ -21,7 +23,7 @@ export default function AppLayout({children}) {
                             <Link to={{ pathname: "/accounts/login"}}>로그인</Link>
                         </Menu.Item>
                         <Menu.Item>
-                            <Link to={{ pathname: "/accounts/friend"}}>추천친구</Link>
+                            <Link to={{ pathname: "/accounts/friend"}}>친구추천</Link>
                         </Menu.Item>
                     </Menu>
                 </div>
