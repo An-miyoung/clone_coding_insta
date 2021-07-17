@@ -9,7 +9,7 @@ export default function AppLayout({children}) {
     return (
         <div className="app">
             <div className="header">
-                <div className="page-logo">
+                <div className="page-logo" style={{marginLeft:'0.5em'}}>
                     <Link to={{ pathname: "/"}}>
                         <img src={LogoImage} alt="logo" style={{marginRight:'0.5em'}} />
                     </Link>

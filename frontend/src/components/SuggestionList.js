@@ -50,7 +50,7 @@ export default function SuggestionList() {
 
         {/* <button onClick={() => refetch}>reload</button> */}
 
-        <Card title="당신에게 추천하는 친구들" size="small" style={{width:'300px'}}>   
+        <Card title="당신에게 추천하는 친구들" size="small" style={{width:'90%'}}>   
                 { userList.map(suggestionUser =>
                 < Suggestion 
                     key={suggestionUser.username} 

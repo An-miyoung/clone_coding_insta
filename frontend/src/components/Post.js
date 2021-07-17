@@ -4,16 +4,24 @@ import { HeartOutlined, UserOutlined} from "@ant-design/icons";
 
 export default function Post({post}) {
     
-        const { photo, caption, location } = post;
+        const { author, photo, caption, location, tag_set, like_user_set } = post;
+        const { username, name, avatar_url } = author;
+
         return (
-            <div className="post" style={{marginBottom:'2rem'}}>
+            <div className="post" style={{textAlign:'center'}}>
                 <Card
                     hoverable
                     cover={<img src={photo} alt={caption}/>}
                     actions={[<HeartOutlined />]}
                 >
                     <Card.Meta 
-                        avatar={<Avatar size="large" icon={<UserOutlined />} />}
+                        avatar={
+                            <Avatar size="large" 
+                                    icon={<img 
+                                        src={ `http://localhost:8000` + avatar_url }
+                                        alt={ username } 
+                                    />} 
+                            />}
                         title={location} 
                         description={caption}
                     />

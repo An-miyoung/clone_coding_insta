@@ -4,7 +4,7 @@ import { Card, Form, Input, Button, notification } from "antd";
 import { SmileOutlined, FrownOutlined } from "@ant-design/icons";
 import { useHistory, useLocation } from "react-router";
 import { useAppContext, setToken } from "store";
-
+import { parseErrorMessages } from "utils/ErrorForms";
 
 export default function Login() {
     const { dispatch } = useAppContext();
@@ -42,17 +42,7 @@ export default function Login() {
                     });
 
                     const {data: fieldsErrorMessages} = error.response;
-                    setFieldErrors(
-                        Object.entries(fieldsErrorMessages).reduce((
-                            acc, [fieldName, errors]) => {
-                                acc[fieldName] = {
-                                    validateStatus: "error",
-                                    help: errors.join(" ")
-                                }
-                            return acc;
-                            }, {}
-                        )
-                    );
+                    setFieldErrors(parseErrorMessages(fieldsErrorMessages));
                 }
             } 
         };
@@ -60,7 +50,7 @@ export default function Login() {
     };
 
     return (
-        <Card title="로그인">
+        <Card title="로그인" style={{width:'90%', marginLeft:'0.5em'}}>
             <Form
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}

@@ -9,7 +9,7 @@ from .models import Post
 
 
 class PostViewSet(ModelViewSet):
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().select_related('author').prefetch_related('tag_set', "like_user_set")
     serializer_class = PostSerializer
     permission_classes = [AllowAny]
 
@@ -22,3 +22,7 @@ class PostViewSet(ModelViewSet):
         # )
         # qs = qs.filter(created_at__gte=timesince)
         # return qs
+
+    def perform_create(self, serializer):
+        serializer.save(author = self.request.user)
+        return super().perform_create(serializer)

@@ -51,7 +51,7 @@ export default function Signup() {
     };
 
     return (
-        <Card title="회원가입">
+        <Card title="회원가입" style={{width:'90%', marginLeft:'0.5em'}}>
             <Form
                 labelCol={{ span: 8 }}
                 wrapperCol={{ span: 16 }}
