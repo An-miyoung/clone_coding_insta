@@ -1,16 +1,15 @@
 # from datetime import timedelta
 # from django.utils import timezone
-from datetime import time, timedelta, timezone
-from decimal import Context
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+from rest_framework import permissions
 from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from .serializers import PostSerializer
-from .models import Post
+from .serializers import PostSerializer, CommentSerializer
+from .models import Post, Comment
 
 
 class PostViewSet(ModelViewSet):
@@ -39,9 +38,9 @@ class PostViewSet(ModelViewSet):
         return super().perform_create(serializer)
 
     # def perform_create(self, serializer):
-    #     caption 에서 tag를 추출
-    #     caption = request.data['caption']
-    #     tag_set = extract_tag_set(caption)
+    #     caption = self.request.data['caption']
+    #     post = self.get_object() 아직 포스트가 만들어지지 않았는데 불러오고 있다.
+    #     tag_set = post.extract_tag_set(caption)
     #     serializer.save(author = self.request.user, tag_set = tag_set)
     #     return super().perform_create(serializer)
 
@@ -57,3 +56,18 @@ class PostViewSet(ModelViewSet):
         post = self.get_object()
         post.like_user_set.remove(self.request.user)
         return Response(status.HTTP_204_NO_CONTENT)
+
+
+class CommentViewSet(ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(post__pk=self.kwargs['post_pk'])
+        return qs
+
+    def perform_create(self, serializer):
+        post = get_object_or_404(Post, pk=self.kwargs['post_pk'])
+        serializer.save(author = self.request.user, post = post)
+        return super().perform_create(serializer)
