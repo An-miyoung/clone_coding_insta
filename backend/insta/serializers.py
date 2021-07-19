@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
-from rest_framework import fields, serializers
-from .models import Post, Comment, Tag
+from rest_framework import serializers
+from .models import Post, Comment
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -11,8 +11,14 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(read_only=True)
+    is_like = serializers.SerializerMethodField("is_like_field")
+
+    def is_like_field(self, post):
+        if 'request' in self.context:
+            user = self.context['request'].user
+            return post.like_user_set.filter(pk=user.pk).exists()
+        return False
 
     class Meta:
         model = Post
-        fields = '__all__'
-        # ['author', 'photo', 'caption', 'location']
+        fields = ['id', 'author', 'photo', 'caption', 'location', 'tag_set', 'is_like']
