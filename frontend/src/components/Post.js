@@ -26,7 +26,7 @@ export default function Post({ post, handleLike }) {
                     avatar={
                         <Avatar size="large" 
                                 icon={<img 
-                                    src={ `http://localhost:8000` + avatar_url }
+                                    src={ avatar_url }
                                     alt={ username } 
                                 />}
                                 style={{marginLeft: '0.5rem'}}

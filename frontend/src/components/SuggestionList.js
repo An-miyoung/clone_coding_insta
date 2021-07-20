@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
-import useAxios from "axios-hooks";
+import { axiosInstance, useAxios } from "api";
 import { useAppContext } from "store";
 import { Card } from 'antd';
 import Suggestion from "components/Suggestion";
@@ -13,7 +12,7 @@ export default function SuggestionList() {
     const [ userList, setUserList ] = useState([]);
 
     const [{ data: origUserList, loading, error }, refetch] = useAxios(
-       { url: "http://localhost:8000/accounts/suggestions/",
+       { url: "/accounts/suggestions/",
          headers,}
     );
 
@@ -31,7 +30,7 @@ export default function SuggestionList() {
     // const userList = origUserList && origUserList.map(user => ({ ...user, is_follow:false}));
 
     const onFollowUser = username => {
-        Axios.post("http://localhost:8000/accounts/follow/", { username }, { headers })
+        axiosInstance.post("/accounts/follow/", { username }, { headers })
             .then(response => {
                 setUserList(prevUserList => 
                     prevUserList.map(user => 

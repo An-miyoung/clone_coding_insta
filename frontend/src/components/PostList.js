@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
-import useAxios from "axios-hooks";
+import { axiosInstance, useAxios } from "api";
 import Post from "./Post";
 import { useAppContext } from "store";
 import { Alert } from "antd";
-import axios from "axios";
 
 
 export default function PostList() {
@@ -13,7 +11,7 @@ export default function PostList() {
     const [ postList, setPostList ] = useState([]);
 
     const [{ data: originPostList, loading, error}, refetch] = useAxios(
-        { url: "http://localhost:8000/api/posts/",
+        { url: "/api/posts/",
           headers,}
     );
 
@@ -22,10 +20,10 @@ export default function PostList() {
     },[originPostList]);
     
     const handleLike = async ({ post, isLike }) => {
-        const apiUrl = `http://localhost:8000/api/posts/${post.id}/like/`;
+        const apiUrl = `/api/posts/${post.id}/like/`;
         const method = isLike ? "POST" : "DELETE";
         try {
-            const response = await Axios({
+            await axiosInstance({
                 url: apiUrl,
                 method,
                 headers
@@ -34,7 +32,6 @@ export default function PostList() {
                 return prevList.map(currentPost => 
                     currentPost === post ? {...currentPost, is_like: isLike} : currentPost)
             });
-            console.log("response handleLike : ", response);
         }
         catch(error) {
             console.log(error);

@@ -1,26 +1,25 @@
 import React, { useState } from "react";
-import Axios from "axios";
-import useAxios from "axios-hooks";
+import { axiosInstance, useAxios } from "api";
 import { Button, Input } from "antd";
 import { useAppContext } from "store";
 import Comment from "./Comment";
 
 export default function  CommentList({ post }) {
-    // const { author, message, post } = post;
+    
     const { store: { jwtToken } } = useAppContext();
     const [ commentContent, setCommentContent] = useState([]);
 
     const headers = { Authorization: `JWT ${jwtToken}` };
 
     const [{ data: commentList, loading, error}, refetch] = useAxios(
-        { url: `http://localhost:8000/api/posts/${post.id}/comments/`,
+        { url: `/api/posts/${post.id}/comments/`,
           headers,}
     );
 
     const handleCommentSave = async () => {
         try {
-            const apiUrl = `http://localhost:8000/api/posts/${post.id}/comments/`
-            await Axios.post(apiUrl, { message: commentContent }, {headers});
+            const apiUrl = `/api/posts/${post.id}/comments/`
+            await axiosInstance.post(apiUrl, { message: commentContent }, {headers});
             setCommentContent("");
             refetch();
         }

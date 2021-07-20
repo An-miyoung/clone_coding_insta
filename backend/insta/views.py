@@ -61,6 +61,11 @@ class PostViewSet(ModelViewSet):
 class CommentViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context["requset"] = self.request
+        return context
     
     def get_queryset(self):
         qs = super().get_queryset()

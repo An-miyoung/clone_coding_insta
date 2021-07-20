@@ -11,7 +11,7 @@ export default function Comment({ comment }) {
                 author={ name.length === 0 ? username : name }
                 avatar={
                     <Avatar
-                        src={ "http://localhost:8000" + avatar_url }
+                        src={ avatar_url }
                         alt={ username }
                     />
                 }
