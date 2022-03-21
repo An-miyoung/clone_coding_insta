@@ -1,5 +1,6 @@
 # 이미지를 기반으로 하는 블로그 를 한번 더 만들어 본 버전.
 
+<img width="1080" alt="스크린샷 2022-03-21 오후 7 46 59" src="https://user-images.githubusercontent.com/61385080/159249056-82600e42-623f-42ca-9ba1-da3d3c1bb62c.png">
 
 인스타그램st 의 이미지를 기반으로 하는 SPA 프로젝트입니다.
 
